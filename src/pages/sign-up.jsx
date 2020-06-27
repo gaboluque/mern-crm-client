@@ -1,9 +1,23 @@
+import { gql } from '@apollo/client';
 import React from 'react';
 import AuthLayout from '../components/Auth/AuthFormLayout';
 import AuthInput from '../components/Form/AuthInput';
 import AuthSubmitButton from '../components/Form/AuthSubmitButton';
 import Form from '../components/Form/Form';
 import validate, { email, required } from '../components/Form/validations';
+import makeMutation from '../hooks/makeMutation';
+import { LOG_IN_PATH } from '../routing/paths';
+
+const SIGN_UP_MUTATION = gql`
+  mutation newUser($input: UserInput) {
+    newUser(input: $input) {
+      id
+      name
+      lastName
+      email
+    }
+  }
+`;
 
 const signUpForm = [
   {
@@ -44,12 +58,19 @@ const initialValues = {
 };
 
 const SignUp = () => {
+  const { callMutation, message } = makeMutation(SIGN_UP_MUTATION);
+
+  const submitSignUp = async (formValues) => {
+    callMutation({
+      formValues,
+      path: LOG_IN_PATH,
+      successMessage: 'Usuario creado correctamente',
+    });
+  };
+
   return (
-    <AuthLayout title="Sign Up">
-      <Form
-        initialValues={initialValues}
-        onSubmit={(formValues) => console.log(formValues)}
-      >
+    <AuthLayout title="Sign Up" message={message}>
+      <Form initialValues={initialValues} onSubmit={submitSignUp}>
         <div className="sign-up-form">
           {signUpForm.map((formItem) => (
             <AuthInput key={formItem.name} {...formItem} />

@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org/) created as a Follow-up project to the "Advance React" course on Udemy. https://www.udemy.com/course/fullstack-react-graphql-y-apollo-de-principiante-a-experto/ 
+This is a [Next.js](https://nextjs.org/) created as a Follow-up project to the "Advance React" course on Udemy. 
+https://www.udemy.com/course/fullstack-react-graphql-y-apollo-de-principiante-a-experto/ 
 
 Some own adaptations for cleaner code 
 
