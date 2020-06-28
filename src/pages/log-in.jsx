@@ -1,69 +1,26 @@
-import { gql } from '@apollo/client';
 import React from 'react';
-import AuthLayout from '../components/Auth/AuthFormLayout';
-import AuthInput from '../components/Form/AuthInput';
-import AuthSubmitButton from '../components/Form/AuthSubmitButton';
-import Form from '../components/Form/Form';
-import validate, { email, required } from '../components/Form/validations';
 import makeMutation from '../hooks/makeMutation';
+import LogIn from '../presenters/Auth/LogIn';
+import { LOG_IN_MUTATION } from '../queries/userQueries';
 import { HOME_PATH } from '../routing/paths';
 
-const LOG_IN_MUTATION = gql`
-  mutation authUser($input: AuthInput) {
-    authUser(input: $input) {
-      token
-    }
-  }
-`;
-
-const logInForm = [
-  {
-    name: 'email',
-    type: 'email',
-    label: 'Email',
-    placeholder: "User's email",
-    validate: validate([required, email]),
-  },
-  {
-    name: 'password',
-    type: 'password',
-    label: 'Password',
-    placeholder: "User's password",
-    validate: validate([required]),
-  },
-];
-
-const initialValues = {
-  email: '',
-  password: '',
-};
-
-const LogIn = () => {
+const LogInContainer = () => {
   const { callMutation, message } = makeMutation(LOG_IN_MUTATION);
 
   const submitLogIn = async (formValues) => {
     await callMutation({
       formValues,
       path: HOME_PATH,
-      callback: ({ authUser: { token } }) =>
-        localStorage.setItem('token', token),
+      callback: ({ authUser: { token, user } }) => {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+      },
     });
   };
 
-  return (
-    <AuthLayout title="Log In" message={message}>
-      <Form initialValues={initialValues} onSubmit={submitLogIn}>
-        <div className="log-in-form">
-          {logInForm.map((formItem) => (
-            <AuthInput key={formItem.name} {...formItem} />
-          ))}
-          <AuthSubmitButton title="Log In" />
-        </div>
-      </Form>
-    </AuthLayout>
-  );
+  return <LogIn message={message} submitLogIn={submitLogIn} />;
 };
 
-LogIn.propTypes = {};
+LogInContainer.propTypes = {};
 
-export default LogIn;
+export default LogInContainer;

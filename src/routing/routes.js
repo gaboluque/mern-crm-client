@@ -22,6 +22,11 @@ export default [
     private: true,
   },
   {
+    title: 'New Client',
+    path: paths.NEW_CLIENT_PATH,
+    private: true,
+  },
+  {
     title: 'Orders',
     path: paths.ORDERS_PATH,
     private: true,
@@ -30,5 +35,11 @@ export default [
     title: 'Products',
     path: paths.PRODUCTS_PATH,
     private: true,
+  },
+  {
+    // Must be always at the end
+    title: 'Not Found',
+    path: paths.NOT_FOUND_PATH,
+    private: false,
   },
 ];

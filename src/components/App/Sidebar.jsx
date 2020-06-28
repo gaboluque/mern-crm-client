@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
-import { string } from 'prop-types';
+import { string, object } from 'prop-types';
 
-const Sidebar = ({ pathname }) => {
+const Sidebar = ({ pathname, auth }) => {
   const menuItem = (path, title) => (
     <li className={pathname === path ? 'bg-blue-800' : ''}>
       <Link href={path}>
@@ -13,8 +13,8 @@ const Sidebar = ({ pathname }) => {
   );
 
   return (
-    <aside className="bg-gray-800 sm:w-1/3 xl:w-1/5 sm:min-h-screen p-5">
-      <div>
+    <aside className="bg-gray-800 sm:w-1/4 xl:w-1/6 sm:min-h-screen">
+      <div className="p-5">
         <p className="text-white text-2xl font-black">CRM Clients</p>
       </div>
       <nav className="mt-5 list-none">
@@ -22,6 +22,9 @@ const Sidebar = ({ pathname }) => {
         {menuItem('/clients', 'Clients')}
         {menuItem('/products', 'Products')}
         {menuItem('/orders', 'Orders')}
+        <li className="absolute sm:w-1/4 xl:w-1/6 bottom-0 bg-blue-800 h-16 text-white p-5">
+          {`${auth.name} ${auth.lastName}`}
+        </li>
       </nav>
     </aside>
   );
@@ -29,6 +32,14 @@ const Sidebar = ({ pathname }) => {
 
 Sidebar.propTypes = {
   pathname: string.isRequired,
+  auth: object,
+};
+
+Sidebar.defaultProps = {
+  auth: {
+    name: '',
+    lastName: '',
+  },
 };
 
 export default Sidebar;

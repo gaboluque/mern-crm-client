@@ -2,8 +2,23 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export default (mutation) => {
-  const [action] = useMutation(mutation);
+const getCacheUpdate = ({ updateAction, queryToUpdate, query }) => ({
+  update(cache, { data: { [updateAction]: newData } }) {
+    const { [queryToUpdate]: oldData } = cache.readQuery({
+      query,
+    });
+    cache.writeQuery({
+      query,
+      data: {
+        [queryToUpdate]: [...oldData, newData],
+      },
+    });
+  },
+});
+
+export default (mutation, cacheUpdateObj) => {
+  const updateOption = cacheUpdateObj ? getCacheUpdate(cacheUpdateObj) : {};
+  const [action, { loading }] = useMutation(mutation, updateOption);
   const [message, setMessage] = useState(null);
   const { push } = useRouter();
 
@@ -17,6 +32,7 @@ export default (mutation) => {
     callback,
     path,
     successMessage = null,
+    onError = null,
   }) => {
     try {
       const { data } = await action({ variables: { input: formValues } });
@@ -24,12 +40,15 @@ export default (mutation) => {
         message: successMessage,
         kind: 'SUCCESS',
       });
-      if (callback) callback(data);
-      if (path) push(path);
+      if (data && callback) callback(data);
+      if (path) {
+        setTimeout(() => push(path), 800);
+      }
     } catch (err) {
       updateMessage({ message: err.message, kind: 'ERROR' });
+      if (onError) onError();
     }
   };
 
-  return { callMutation, message };
+  return { callMutation, message, loading };
 };

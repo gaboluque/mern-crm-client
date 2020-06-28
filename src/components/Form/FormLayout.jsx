@@ -1,10 +1,9 @@
-import { node, string, object } from 'prop-types';
+import { node, object, string } from 'prop-types';
 import React from 'react';
-import Layout from '../App/Layout';
 
-const AuthFormLayout = ({ title, message, children }) => {
+const FormLayout = ({ title, message, children }) => {
   return (
-    <Layout>
+    <>
       {message && (
         <div
           className={`bg-${message.kind === 'ERROR' ? 'red' : 'green'}-700
@@ -21,18 +20,19 @@ const AuthFormLayout = ({ title, message, children }) => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 
-AuthFormLayout.propTypes = {
-  title: string.isRequired,
+FormLayout.propTypes = {
+  title: string,
   message: object,
   children: node.isRequired,
 };
 
-AuthFormLayout.defaultProps = {
+FormLayout.defaultProps = {
   message: null,
+  title: '',
 };
 
-export default AuthFormLayout;
+export default FormLayout;

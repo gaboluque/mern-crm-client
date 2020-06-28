@@ -2,7 +2,7 @@ import { useField } from 'formik';
 import { oneOf, string } from 'prop-types';
 import React from 'react';
 
-const AuthInput = ({ label, type, placeholder, ...rest }) => {
+const Input = ({ label, type, placeholder, ...rest }) => {
   const [field, { error, touched }] = useField(rest);
   const hasError = error && touched;
   return (
@@ -29,10 +29,10 @@ const AuthInput = ({ label, type, placeholder, ...rest }) => {
   );
 };
 
-AuthInput.propTypes = {
+Input.propTypes = {
   label: string.isRequired,
-  type: oneOf(['email', 'password', 'text']).isRequired,
+  type: oneOf(['email', 'password', 'text', 'tel']).isRequired,
   placeholder: string.isRequired,
 };
 
-export default AuthInput;
+export default Input;

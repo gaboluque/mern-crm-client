@@ -2,19 +2,39 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { node } from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import useAuth from '../../hooks/useAuth';
 import routes from '../../routing/routes';
 import Sidebar from './Sidebar';
+import { NOT_FOUND_PATH } from '../../routing/paths';
 
-const getRoute = (pathname) => routes.find((route) => route.path === pathname);
+const getRoute = (pathname) => {
+  const route = routes.find(
+    (r) => r.path === pathname || r.title === 'Not Found'
+  );
+  return route;
+};
 
 const Layout = ({ children }) => {
-  const [route, setRoute] = useState(routes[0]);
-  const router = useRouter();
+  const { pathname, push } = useRouter();
+  const [route, setRoute] = useState(getRoute(pathname));
+  const { auth } = useAuth(route.path);
 
   useEffect(() => {
-    const newRoute = getRoute(router.pathname);
+    const abortController = new AbortController();
+
+    const newRoute = getRoute(pathname);
     setRoute(newRoute);
-  }, [router.pathname]);
+
+    return () => {
+      abortController.abort();
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    if (route.path === NOT_FOUND_PATH) {
+      push(NOT_FOUND_PATH);
+    }
+  }, [route]);
 
   return (
     <>
@@ -34,8 +54,8 @@ const Layout = ({ children }) => {
       {route.private ? (
         <div className="bg-gray-200 min-h-screen">
           <div className="flex min-h-screen">
-            <Sidebar pathname={router.pathname} />
-            <main className="sm:w-2/3 xl:w-4/5 sm:min-h-screen p-5">
+            <Sidebar pathname={pathname} auth={auth} />
+            <main className="sm:w-3/4 xl:w-5/6 sm:min-h-screen p-5">
               {children}
             </main>
           </div>
