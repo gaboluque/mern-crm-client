@@ -29,9 +29,9 @@ const NewClientContainer = () => {
     cacheUpdate
   );
 
-  const submitNewClient = async (formValues) => {
+  const submitNewClient = async (input) => {
     callMutation({
-      formValues,
+      formValues: { input },
       path: CLIENTS_PATH,
       successMessage: 'Cliente creado correctamente',
     });

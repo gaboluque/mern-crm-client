@@ -7,9 +7,9 @@ import { HOME_PATH } from '../routing/paths';
 const LogInContainer = () => {
   const { callMutation, message } = makeMutation(LOG_IN_MUTATION);
 
-  const submitLogIn = async (formValues) => {
+  const submitLogIn = async (input) => {
     await callMutation({
-      formValues,
+      formValues: { input },
       path: HOME_PATH,
       callback: ({ authUser: { token, user } }) => {
         localStorage.setItem('token', token);

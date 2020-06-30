@@ -8,9 +8,9 @@ import Sidebar from './Sidebar';
 import { NOT_FOUND_PATH } from '../../routing/paths';
 
 const getRoute = (pathname) => {
-  const route = routes.find(
-    (r) => r.path === pathname || r.title === 'Not Found'
-  );
+  const route = routes.find((r) => {
+    return r.path === pathname || r.title === 'Not Found';
+  });
   return route;
 };
 

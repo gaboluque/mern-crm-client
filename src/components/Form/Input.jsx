@@ -31,7 +31,7 @@ const Input = ({ label, type, placeholder, ...rest }) => {
 
 Input.propTypes = {
   label: string.isRequired,
-  type: oneOf(['email', 'password', 'text', 'tel']).isRequired,
+  type: oneOf(['email', 'password', 'text', 'number', 'tel']).isRequired,
   placeholder: string.isRequired,
 };
 

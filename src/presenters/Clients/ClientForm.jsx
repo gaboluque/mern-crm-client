@@ -48,13 +48,17 @@ const ClientForm = ({ loading }) => {
       {newClientForm.map((formItem) => (
         <Input key={formItem.name} {...formItem} />
       ))}
-      <SubmitButton disabled={loading} title="Create client" />
+      <SubmitButton disabled={loading} title="Save client" />
     </div>
   );
 };
 
 ClientForm.propTypes = {
-  loading: bool.isRequired,
+  loading: bool,
+};
+
+ClientForm.defaultProps = {
+  loading: false,
 };
 
 export default ClientForm;

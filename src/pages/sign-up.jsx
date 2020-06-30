@@ -7,9 +7,9 @@ import { LOG_IN_PATH } from '../routing/paths';
 const SignUpContainer = () => {
   const { callMutation, message } = makeMutation(SIGN_UP_MUTATION);
 
-  const submitSignUp = async (formValues) => {
+  const submitSignUp = async (input) => {
     callMutation({
-      formValues,
+      formValues: input,
       path: LOG_IN_PATH,
       successMessage: 'Usuario creado correctamente',
     });

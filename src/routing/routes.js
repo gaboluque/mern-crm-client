@@ -27,6 +27,26 @@ export default [
     private: true,
   },
   {
+    title: 'Show Client',
+    path: paths.SHOW_CLIENT_PATH('[id]'),
+    private: true,
+  },
+  {
+    title: 'Products',
+    path: paths.PRODUCTS_PATH,
+    private: true,
+  },
+  {
+    title: 'New Product',
+    path: paths.NEW_PRODUCT_PATH,
+    private: true,
+  },
+  {
+    title: 'Show Product',
+    path: paths.SHOW_PRODUCT_PATH('[id]'),
+    private: true,
+  },
+  {
     title: 'Orders',
     path: paths.ORDERS_PATH,
     private: true,
