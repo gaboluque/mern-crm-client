@@ -2,7 +2,10 @@ import { bool } from 'prop-types';
 import React from 'react';
 import Input from '../../components/Form/Input';
 import SubmitButton from '../../components/Form/SubmitButton';
-import validateInput, { required } from '../../components/Form/validations';
+import validateInput, {
+  positive,
+  required,
+} from '../../components/Form/validations';
 
 const newProductForm = [
   {
@@ -17,7 +20,7 @@ const newProductForm = [
     type: 'number',
     label: 'Stock',
     placeholder: "Product's initial stock",
-    validate: validateInput([required]),
+    validate: validateInput([required, positive]),
   },
   {
     name: 'price',
