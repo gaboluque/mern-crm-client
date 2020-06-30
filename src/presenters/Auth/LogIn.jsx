@@ -5,7 +5,7 @@ import Form from '../../components/Form/Form';
 import FormLayout from '../../components/Form/FormLayout';
 import Input from '../../components/Form/Input';
 import SubmitButton from '../../components/Form/SubmitButton';
-import validate, { email, required } from '../../components/Form/validations';
+import validateInput, { email, required } from '../../components/Form/validations';
 import { SIGN_UP_PATH } from '../../routing/paths';
 import LinkButton from '../../components/Layout/Buttons/LinkButton';
 
@@ -15,14 +15,14 @@ const logInForm = [
     type: 'email',
     label: 'Email',
     placeholder: "User's email",
-    validate: validate([required, email]),
+    validate: validateInput([required, email]),
   },
   {
     name: 'password',
     type: 'password',
     label: 'Password',
     placeholder: "User's password",
-    validate: validate([required]),
+    validate: validateInput([required]),
   },
 ];
 

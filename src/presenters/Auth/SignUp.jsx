@@ -4,7 +4,7 @@ import Form from '../../components/Form/Form';
 import FormLayout from '../../components/Form/FormLayout';
 import Input from '../../components/Form/Input';
 import SubmitButton from '../../components/Form/SubmitButton';
-import validate, { email, required } from '../../components/Form/validations';
+import validateInput, { email, required } from '../../components/Form/validations';
 import LinkButton from '../../components/Layout/Buttons/LinkButton';
 import { LOG_IN_PATH } from '../../routing/paths';
 
@@ -14,28 +14,28 @@ const signUpForm = [
     type: 'text',
     label: 'Name',
     placeholder: "User's name",
-    validate: validate([required]),
+    validate: validateInput([required]),
   },
   {
     name: 'lastName',
     type: 'text',
     label: 'Last name',
     placeholder: "User's last name",
-    validate: validate([required]),
+    validate: validateInput([required]),
   },
   {
     name: 'email',
     type: 'email',
     label: 'Email',
     placeholder: "User's email",
-    validate: validate([required, email]),
+    validate: validateInput([required, email]),
   },
   {
     name: 'password',
     type: 'password',
     label: 'Password',
     placeholder: "User's password",
-    validate: validate([required]),
+    validate: validateInput([required]),
   },
 ];
 
