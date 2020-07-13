@@ -19,4 +19,5 @@ It's meant to work with the mern-csm-server project as a backend service
 - [Apollo Client](https://www.apollographql.com/docs/react/) 
 - [Formik](https://jaredpalmer.com/formik/) 
 - [Tailwind](https://tailwindcss.com/) 
+- [Recharts](https://recharts.org/) 
 
