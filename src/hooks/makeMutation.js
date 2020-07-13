@@ -2,16 +2,41 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { fireAlert } from '../components/Layout/Feedback/swalAlert';
+import { clone } from '../utils/helperFunctions';
 
-const getCacheUpdate = ({ updateAction, queryToUpdate, query }) => ({
+const findIdIndexAction = (data, id, action) => {
+  const index = data.findIndex((dataItem) => dataItem.id === id);
+  if (index >= 0) {
+    action(index);
+  }
+};
+
+const getCacheUpdate = ({ updateAction, queryToUpdate, query, action }) => ({
   update(cache, { data: { [updateAction]: newData } }) {
-    const { [queryToUpdate]: oldData } = cache.readQuery({
+    const { [queryToUpdate]: cacheData } = cache.readQuery({
       query,
     });
+
+    let currentData = clone(cacheData);
+
+    if (action === 'create') {
+      currentData = [...currentData, newData];
+    }
+    if (action === 'update') {
+      findIdIndexAction(currentData, newData.id, (index) => {
+        currentData[index] = newData;
+      });
+    }
+    if (action === 'delete') {
+      findIdIndexAction(currentData, newData.id, (index) => {
+        currentData.splice(index, 1);
+      });
+    }
+
     cache.writeQuery({
       query,
       data: {
-        [queryToUpdate]: [...oldData, newData],
+        [queryToUpdate]: currentData,
       },
     });
   },
@@ -31,7 +56,6 @@ export default (mutation, cacheUpdateObj) => {
 
   const updateMessage = (newMessage) => {
     setMessage(newMessage);
-    setTimeout(() => setMessage(null), 3000);
   };
 
   const callMutation = async ({

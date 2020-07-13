@@ -16,11 +16,12 @@ const deleteUpdateCache = {
   updateAction: 'deleteClient',
   queryToUpdate: 'getSellerClients',
   query: GET_SELLER_CLIENTS_QUERY,
+  action: 'delete',
 };
 
 const Clients = () => {
   const { push } = useRouter();
-  const { data, loading } = makeQuery(GET_SELLER_CLIENTS_QUERY);
+  const { data, loading } = makeQuery({ query: GET_SELLER_CLIENTS_QUERY });
   const { callMutation } = makeMutation(
     DELETE_CLIENT_MUTATION,
     deleteUpdateCache
@@ -48,7 +49,12 @@ const Clients = () => {
   return (
     <div>
       <h1>Clients</h1>
-      <LinkButton type="button" path={NEW_CLIENT_PATH} text="New Client" />
+      <LinkButton
+        className="mb-2"
+        type="button"
+        path={NEW_CLIENT_PATH}
+        text="New Client"
+      />
       {loading ? (
         <Loader />
       ) : (

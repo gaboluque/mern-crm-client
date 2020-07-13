@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 
 const fireAlert = (title, message, icon) => {
-  Swal.fire(title, message, icon);
+  Swal.fire({ title: message, icon, timer: 1500, showConfirmButton: false });
 };
 
 const confirmAlert = ({

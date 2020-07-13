@@ -52,8 +52,13 @@ export default [
     private: true,
   },
   {
-    title: 'Products',
-    path: paths.PRODUCTS_PATH,
+    title: 'New Order',
+    path: paths.NEW_ORDER_PATH,
+    private: true,
+  },
+  {
+    title: 'Show Order',
+    path: paths.SHOW_ORDER_PATH('[id]'),
     private: true,
   },
   {

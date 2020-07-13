@@ -46,7 +46,9 @@ const GET_PRODUCT_QUERY = gql`
 
 const DELETE_PRODUCT_MUTATION = gql`
   mutation deleteProduct($id: ID!) {
-    deleteProduct(id: $id)
+    deleteProduct(id: $id) {
+      id
+    }
   }
 `;
 

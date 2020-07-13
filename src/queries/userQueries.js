@@ -25,4 +25,22 @@ const SIGN_UP_MUTATION = gql`
   }
 `;
 
-export { LOG_IN_MUTATION, SIGN_UP_MUTATION };
+const GET_DASHBOARD_QUERY = gql`
+  query getDashboard {
+    getBestClients {
+      client {
+        name
+        company
+      }
+      total
+    }
+    getBestSellers {
+      seller {
+        name
+      }
+      total
+    }
+  }
+`;
+
+export { LOG_IN_MUTATION, SIGN_UP_MUTATION, GET_DASHBOARD_QUERY };

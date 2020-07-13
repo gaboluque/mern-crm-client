@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
       </Head>
       {route.private ? (
         <div className="bg-gray-200 min-h-screen">
-          <div className="flex min-h-screen">
+          <div className="md:flex flex-col md:flex-row md:min-h-screen w-full">
             <Sidebar pathname={pathname} auth={auth} />
             <main className="sm:w-3/4 xl:w-5/6 sm:min-h-screen p-5">
               {children}

@@ -21,10 +21,11 @@ const cacheUpdate = {
   updateAction: 'newClient',
   queryToUpdate: 'getSellerClients',
   query: GET_SELLER_CLIENTS_QUERY,
+  action: 'create',
 };
 
 const NewClientContainer = () => {
-  const { callMutation, loading, message } = makeMutation(
+  const { callMutation, loading } = makeMutation(
     NEW_CLIENT_MUTATION,
     cacheUpdate
   );
@@ -33,14 +34,15 @@ const NewClientContainer = () => {
     callMutation({
       formValues: { input },
       path: CLIENTS_PATH,
-      successMessage: 'Cliente creado correctamente',
+      successMessage: 'Client created successfully',
+      withAlert: true,
     });
   };
 
   return (
     <>
       <h1>New Client</h1>
-      <FormLayout message={message}>
+      <FormLayout>
         <Form initialValues={initialValues} onSubmit={submitNewClient}>
           <ClientForm loading={loading} />
         </Form>

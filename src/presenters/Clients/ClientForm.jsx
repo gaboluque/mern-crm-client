@@ -1,8 +1,11 @@
-import React from 'react';
 import { bool } from 'prop-types';
+import React from 'react';
 import Input from '../../components/Form/Input';
 import SubmitButton from '../../components/Form/SubmitButton';
-import validateInput, { required, email } from '../../components/Form/validations';
+import validateInput, {
+  email,
+  required,
+} from '../../components/Form/validations';
 
 const newClientForm = [
   {

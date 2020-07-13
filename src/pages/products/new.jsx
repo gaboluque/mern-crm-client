@@ -19,10 +19,11 @@ const cacheUpdate = {
   updateAction: 'newProduct',
   queryToUpdate: 'getProducts',
   query: GET_PRODUCTS_QUERY,
+  action: 'create',
 };
 
 const NewProductContainer = () => {
-  const { callMutation, loading, message } = makeMutation(
+  const { callMutation, loading } = makeMutation(
     NEW_PRODUCT_MUTATION,
     cacheUpdate
   );
@@ -31,14 +32,15 @@ const NewProductContainer = () => {
     callMutation({
       formValues: { input },
       path: PRODUCTS_PATH,
-      successMessage: 'Producte creado correctamente',
+      withAlert: true,
+      successMessage: 'Product created successffully',
     });
   };
 
   return (
     <>
       <h1>New Product</h1>
-      <FormLayout message={message}>
+      <FormLayout>
         <Form initialValues={initialValues} onSubmit={submitNewProduct}>
           <ProductForm loading={loading} />
         </Form>

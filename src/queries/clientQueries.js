@@ -56,7 +56,9 @@ const GET_CLIENT_QUERY = gql`
 
 const DELETE_CLIENT_MUTATION = gql`
   mutation deleteClient($id: ID!) {
-    deleteClient(id: $id)
+    deleteClient(id: $id) {
+      id
+    }
   }
 `;
 

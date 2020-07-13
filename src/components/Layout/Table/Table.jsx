@@ -5,7 +5,7 @@ const defaultRender = (value) => value;
 
 const Table = ({ dataSource, columns }) => {
   return (
-    <table className="table-auto shadow-md mt-10 w-ful w-lg">
+    <table className="table-auto shadow-md w-ful w-lg">
       <thead className="bg-gray-800">
         <tr className="text-white">
           {columns.map((column) => (

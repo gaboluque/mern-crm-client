@@ -9,7 +9,7 @@ const SignUpContainer = () => {
 
   const submitSignUp = async (input) => {
     callMutation({
-      formValues: input,
+      formValues: { input },
       path: LOG_IN_PATH,
       successMessage: 'Usuario creado correctamente',
     });

@@ -16,11 +16,12 @@ const deleteUpdateCache = {
   updateAction: 'deleteProduct',
   queryToUpdate: 'getProducts',
   query: GET_PRODUCTS_QUERY,
+  action: 'delete',
 };
 
 const Products = () => {
   const { push } = useRouter();
-  const { data, loading } = makeQuery(GET_PRODUCTS_QUERY);
+  const { data, loading } = makeQuery({ query: GET_PRODUCTS_QUERY });
   const { callMutation } = makeMutation(
     DELETE_PRODUCT_MUTATION,
     deleteUpdateCache
@@ -48,7 +49,12 @@ const Products = () => {
   return (
     <div>
       <h1>Products</h1>
-      <LinkButton type="button" path={NEW_PRODUCT_PATH} text="New Product" />
+      <LinkButton
+        className="mb-2"
+        type="button"
+        path={NEW_PRODUCT_PATH}
+        text="New Product"
+      />
       {loading ? (
         <Loader />
       ) : (

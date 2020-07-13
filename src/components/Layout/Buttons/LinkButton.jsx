@@ -12,11 +12,11 @@ const getStyles = (type) => {
   }
 };
 
-const LinkButton = ({ text, path, type }) => {
+const LinkButton = ({ text, path, type, className }) => {
   const styles = getStyles(type);
   return (
     <Link href={path}>
-      <a className={styles}>{text}</a>
+      <a className={`${styles} ${className}`}>{text}</a>
     </Link>
   );
 };
@@ -24,11 +24,13 @@ const LinkButton = ({ text, path, type }) => {
 LinkButton.propTypes = {
   text: string.isRequired,
   path: string.isRequired,
+  className: string,
   type: oneOf(['link', 'button']),
 };
 
 LinkButton.defaultProps = {
   type: 'link',
+  className: '',
 };
 
 export default LinkButton;

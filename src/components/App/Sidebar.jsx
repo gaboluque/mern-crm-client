@@ -13,7 +13,7 @@ const Sidebar = ({ pathname, auth }) => {
   );
 
   return (
-    <aside className="bg-gray-800 sm:w-1/4 xl:w-1/6 sm:min-h-screen">
+    <aside className="bg-gray-800 sm:w-1/5 xl:w-1/6 sm:min-h-screen">
       <div className="p-5">
         <p className="text-white text-2xl font-black">CRM Clients</p>
       </div>
@@ -22,7 +22,7 @@ const Sidebar = ({ pathname, auth }) => {
         {menuItem('/clients', 'Clients')}
         {menuItem('/products', 'Products')}
         {menuItem('/orders', 'Orders')}
-        <li className="absolute sm:w-1/4 xl:w-1/6 bottom-0 bg-blue-800 h-16 text-white p-5">
+        <li className="sm:absolute sm:w-1/5 xl:w-1/6 bottom-0 bg-blue-800 h-16 text-white p-5">
           {`${auth.name} ${auth.lastName}`}
         </li>
       </nav>

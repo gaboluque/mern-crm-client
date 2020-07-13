@@ -4,7 +4,10 @@ import Form from '../../components/Form/Form';
 import FormLayout from '../../components/Form/FormLayout';
 import Input from '../../components/Form/Input';
 import SubmitButton from '../../components/Form/SubmitButton';
-import validateInput, { email, required } from '../../components/Form/validations';
+import validateInput, {
+  email,
+  required,
+} from '../../components/Form/validations';
 import LinkButton from '../../components/Layout/Buttons/LinkButton';
 import { LOG_IN_PATH } from '../../routing/paths';
 

@@ -16,7 +16,11 @@ const ClientFormContainer = () => {
   const {
     query: { id },
   } = useRouter();
-  const { data, loading } = makeQuery(GET_CLIENT_QUERY, { id }, { skip: !id });
+  const { data, loading } = makeQuery({
+    query: GET_CLIENT_QUERY,
+    variables: { id },
+    options: { skip: !id },
+  });
   const { callMutation, loading: loadingSave } = makeMutation(
     UPDATE_CLIENT_MUTATION
   );
@@ -28,6 +32,7 @@ const ClientFormContainer = () => {
       formValues: { input, id },
       withAlert: true,
       path: CLIENTS_PATH,
+      successMessage: 'Client updated successfully',
     });
   };
 
